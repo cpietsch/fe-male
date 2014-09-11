@@ -27,6 +27,8 @@ circle {
     fill: rgb(19, 74, 124);
 }
 
+.
+
 
 text {
   fill:#FFF;
@@ -50,13 +52,17 @@ div.tooltip {
 <script src="js/d3.v3.min.js"></script>
 <script>
 
-d3.csv("data.csv", function(data) {
+d3.csv("data2.csv", function(data) {
 
   // data.forEach(function(d){
   //   d.pMale = +d.pMale;
   //   d.pFemale = +d.pFemale;
   // })
   console.log(data);
+
+  data = data.filter(function (d) {
+    return d.cat === location.hash.replace('#', '');
+  })
 
   var circleInput = {
     children: data
