@@ -5,6 +5,7 @@
 
 text {
   font: 10px sans-serif;
+  fill:#FFF;
 }
 
 circle {
@@ -22,14 +23,15 @@ circle {
 
 
 .Male {
-    fill: rgb(31, 119, 180);
+    
+    fill: rgb(253, 174, 107);
 }
 
 .Female {
-    fill: rgb(19, 74, 124);
+   fill: rgb(230, 85, 13); 
 }
 
-.
+
 
 
 text {
@@ -41,7 +43,7 @@ div.tooltip {
   text-align: center;           
   /*width: 90px;                  
   height: 60px; */                
-  padding: 2px;             
+  padding: 5px;             
   font: 12px sans-serif;        
   background: lightsteelblue;   
   border: 0px;      
@@ -51,10 +53,10 @@ div.tooltip {
 
 </style>
 <body>
-<script src="js/d3.v3.min.js"></script>
+<script src="../js/d3.v3.min.js"></script>
 <script>
 
-d3.csv("data2.csv", function(data) {
+d3.csv("italy.csv", function(data) {
 
   // data.forEach(function(d){
   //   d.pMale = +d.pMale;
@@ -117,7 +119,7 @@ d3.csv("data2.csv", function(data) {
               .style("opacity", .9);      
           div.html(d["short names"] + "<br />" +
                 "Female: " + d.Female + " (" + d.pFemale + "%" + ")" + "<br />" +
-                "Male: " + d.pMale + " (" + d.pMale + "%" + ")" + "<br />")   
+                "Male: " + d.Male + " (" + d.pMale + "%" + ")" + "<br />")   
               .style("left", (d3.event.pageX) + "px")     
               .style("top", (d3.event.pageY - 28) + "px"); 
           })                  
@@ -126,9 +128,6 @@ d3.csv("data2.csv", function(data) {
               .duration(500)      
               .style("opacity", 0);   
       })
-
-
-
       .each(function(d){
 
       arc.outerRadius(d.r);

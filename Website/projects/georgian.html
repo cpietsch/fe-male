@@ -1,281 +1,166 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<meta charset="utf-8">
+<style>
 
-<head>
+text {
+  font: 10px sans-serif;
+  fill:#FFF;
+}
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+circle {
+    opacity: 0.9;
+}
 
-    <title>M100 Young European Journalists Data-driven Journalism Workshop</title>
-
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/1-col-portfolio.css" rel="stylesheet">
-
-    <script type="text/javascript" src="//use.typekit.net/adr7ozi.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+/*.Male {
+    opacity: 0.3;
+    fill:#FFF;
+}
+.Male {
+    opacity: 0.8;
+}*/
 
 
 
-</head>
+.Male {
+    fill: rgb(31, 119, 180);
+}
 
+.Female {
+    fill: rgb(19, 74, 124);
+}
+
+
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  /*width: 90px;                  
+  height: 60px; */                
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}
+
+</style>
 <body>
+<script src="../js/d3.v3.min.js"></script>
+<script>
 
-    <!-- Navigation and Header (Please leave this section unchanged)-->
+d3.csv("georgian.csv", function(data) {
 
-    <nav class="navbar navbar-fixed-top menu-styles" role="navigation">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-1">  
-                </div>
-                <div class="col-md-10">
-                    <div>
-                        <a class="navbar-brand" href="../index.html">M100 Visualization Workshop</a>
-                    </div> 
-                </div>
-            </div>
-        </div>
-    </nav>
+  // data.forEach(function(d){
+  //   d.pMale = +d.pMale;
+  //   d.pFemale = +d.pFemale;
+  // })
+  console.log(data);
 
-    <div id="header_project" class="bg_img">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-1">  
-                </div>
-                <div class="col-md-10">
-                    <h1>Visualization in Journalism
-                    </h1>
-                    <h2>M100 Young European Journalists Workshop <br> 8./11. September 2014 at University of Applied <br> Sciences Potsdam
-                    </h2>
-                </div>
-                <div class="col-md-1">  
-                </div>
-            </div>
-        </div>
-    </div>
+  data = data.filter(function (d) {
+    return d.cat === location.hash.replace('#', '');
+  })
 
-    <!-- End Navigation and Header -->
+  var circleInput = {
+    children: data
+  };
 
+  var arc = d3.svg.arc()
+      .innerRadius(0);
 
+  var pie = d3.layout.pie()
+      .sort(null)
+      .value(function(d) { return d.val; });
 
-    <!-- Page Content -->
+  var diameter = 700,
+      format = d3.format(",d"),
+      color = d3.scale.category10();
+      maxTextSize = 16,
+      svg;
 
+  var bubble = d3.layout.pack()
+      .sort(null)
+      .size([diameter, diameter])
+      .padding(3)
+      .value(function(d){ return d.both/100; })
 
+  var svg = d3.select("body").append("svg")
+      .attr("width", diameter)
+      .attr("height", diameter)
+      .attr("class", "bubble")
+      .append("g");
 
-    <div class="container">
-        
-        <div class="row thumbnails">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
+  var node = svg.selectAll(".node")
+      .data(bubble.nodes(circleInput)
+      .filter(function (d) {
+        return !d.children;
+      }))
+      .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function (d) {
+      return "translate(" + d.x + "," + d.y + ")";
+  });
 
-                <iframe width='100%' height='520' frameborder='0' src='http://chernetsky.cartodb.com/viz/91d1853c-39bb-11e4-849f-0e230854a1cb/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+  var div = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
 
-            </div>
-            <div class="col-md-1">  
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Enter your project title here -->
-
-                <h2 class="project">Women in politics</h2>
-            </div>
-            <div class="col-md-1">  
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Enter a short subheadline here -->
-
-                <h3 class="project">Did you ever get a feeling that men rule the world?</h3>
-            </div>
-            <div class="col-md-1">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Enter your names here -->
-
-                <h3 class="group_participants">First Name Last Name, First Name Last Name</h3>
-            </div>
-            <div class="col-md-1">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Insert your text into these paragraphs -->
-
-                <p class="project_description">First of all, we made a map showing the correlation between males and females seats in Parliament. According to this map, women are being slightly underrepresented in Eastern Europe. The fewest number of females-politicians was established in Ukraine, with 9.7% in Parliament. Interestingly enough, Hungary is also among underrepresented countries where women politicians make around 10.1%. The highest number of female politicians was found in Andorra and Sweden, with 50% and 45% accordingly. There is a noticeable gap between Eastern and Western Europe and there is definitely a trend towards more female politicians in Scandinavian countries.</p>
-
-
-                <p class="project_description">Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac</p>
-            </div>
-            <div class="col-md-1">
-            </div>
-        </div>
-
-        <div class="row thumbnails">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Link to a large version of the thumbnail your group is showing on the start page -->
-                <iframe src="../../georgian.html#Judge" style="border:0px  none;" name="viz" scrolling="no" frameborder="0" align=aus marginheight="0px" marginwidth="0px" height="700" width="940"></iframe>
-
-                
-            </div>
-            <div class="col-md-1">  
-            </div>
-        </div>
-
-         <div class="row">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Insert your text into these paragraphs -->
-
-                <p class="project_description">Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien.</p>
-
-            </div>
-            <div class="col-md-1">
-            </div>
-        </div>
-
-        <div class="row thumbnails">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Link to a large version of the thumbnail your group is showing on the start page -->
-                <iframe src="../../georgian.html#Parliament" style="border:0px  none;" name="viz" scrolling="no" frameborder="0" align=aus marginheight="0px" marginwidth="0px" height="700" width="940"></iframe>
-
-                
-            </div>
-            <div class="col-md-1">  
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Insert your text into these paragraphs -->
-                
-
-                <p class="project_description">Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac</p>
-            </div>
-            <div class="col-md-1">
-            </div>
-        </div>
-
-        <div class="row thumbnails">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-
-                <!-- Link to a large version of the thumbnail your group is showing on the start page -->
-                <iframe src="../../georgian.html#Executive" style="border:0px  none;" name="viz" scrolling="no" frameborder="0" align=aus marginheight="0px" marginwidth="0px" height="700" width="940"></iframe>
-
-                
-            </div>
-            <div class="col-md-1">  
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-1">  
-            </div>
-            <div class="col-md-10">
-                <div class="img_container_left">
-
-                    <!-- You can insert smaller images half the size of the text block in any paragraph.
-                         Use the class "img_container_left" or "img_container_right" depending on where you
-                         want to position it. Width should be 480 pixels. -->
-
-                    <img class="img-responsive" src="http://placehold.it/480x300" alt="project_image">
-                    <p class="img_caption">image caption</p>
-                </div>
-
-                <p class="project_description">Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac</p>
-            </div>
-            <div class="col-md-1">
-            </div>
-        </div>
-    </div>
+  node.append("g")
+      .on("mouseover", function(d) {   
+          div.transition()        
+              .duration(200)      
+              .style("opacity", .9);      
+          div.html(d["short names"] + "<br />" +
+                "Female: " + d.Female + " (" + d.pFemale + "%" + ")" + "<br />" +
+                "Male: " + d.Male + " (" + d.pMale + "%" + ")" + "<br />")   
+              .style("left", (d3.event.pageX) + "px")     
+              .style("top", (d3.event.pageY - 28) + "px"); 
+          })                  
+      .on("mouseout", function(d) {       
+          div.transition()        
+              .duration(500)      
+              .style("opacity", 0);   
+      })
 
 
 
-    <!-- End Page Content -->
+      .each(function(d){
+
+      arc.outerRadius(d.r);
+
+      var sub = pie([
+          { val: d.Male, name: "Male" },
+          { val: d.Female, name: "Female" }
+      ]);
+      
+      console.log(sub);
+
+      var g = d3.select(this).selectAll(".arc")
+            .data(sub)
+          .enter().append("g")
+            .attr("class", "arc");
+
+
+        g.append("path")
+            .attr("d", arc)
+            .attr("class", function(d){
+              return d.data.name;
+            })
+            // .style("fill", function(d) { console.log(d); return color(d.data.name); });
 
 
 
-    <!-- Footer (Please leave this section unchanged) -->
+  })
 
-    <div id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-1">  
-                </div>
-                <div class="col-md-10">
-                    <h3 class="footer">This workshop has been organized by:
-                    </h3>
-                </div>
-                <div class="col-md-1">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">  
-                </div>
-                <div class="col-md-3">
-                    <div class="m_logo">
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="fhp_logo">
-                    </div>
-                </div>
-                <div class="col-md-1">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">  
-                </div>
-                <div class="col-lg-10">
-                    <p>Copyright &copy; Fachhochschule Potsdam 2014</p>
-                </div>
-                <div class="col-md-1">  
-                </div>
-            </div>
-        </div>
-    </div>
+  node.append("text")
+        .attr("dy", ".3em")
+        .style("text-anchor", "middle")
+        .text(function(d) { return d.r > 20 ? d['short names'].substring(0, d.r / 3) : ''; });
 
-    <!-- End Footer -->
 
-    <script src="js/jquery-1.11.0.js"></script>
 
-    <script src="js/bootstrap.min.js"></script>
+});
 
-</body>
 
-</html>
+</script>

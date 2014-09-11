@@ -1,5 +1,5 @@
 cat,short names,Male,Female,both,pFemale,pMale
-Justice,Court and Justice,4798,4218,9016,46.8%,53.2%
+Judge,Court and Justice,4798,4218,9016,46.8,53.2
 Executive,Affari esteri,2962,2560,5022,59.00,51.00
 Executive,Lavoro,4147,2643,6790,61.10,38.90
 Executive,Difesa,7567,19935,27502,27.50,72.50
@@ -14,5 +14,5 @@ Executive,Istruzione,2787,1763,4550,61.30,38.70
 Executive,Sviluppo economico,1456,1597,3053,47.70,52.30
 Executive,Beni e  attività culturali,9617,8714,18331,52.50,47.50
 Executive,Totale,74914,72973,147887,50.70,49.30
-Parliament,Senato,62,284,346,17.9%,82.1%
-Parliament,Camera dei deputati,198,432,630,31.4%,68.6%
+Parliament,Senato,62,284,346,17.9,82.1
+Parliament,Camera dei deputati,198,432,630,31.4,68.6
