@@ -1,0 +1,199 @@
+/*!
+ * Start Bootstrap - 1 Col Portfolio HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+ .menu-styles {
+ 	background-color: #ffffff;
+ 	border: none;
+ }
+
+ .navbar-brand {
+ 	color: #616161;
+ 	font-family: "museo-slab";
+	font-weight: 500;
+	font-size: 16px;
+ }
+
+ .navbar-brand:hover {
+ 	color: #0067B1;
+ 	font-family: "museo-slab";
+	font-weight: 500;
+	font-size: 16px;
+ }
+
+#header {
+	padding-bottom: 40px;
+	margin-bottom: 80px;
+	background-color: #0067B1; /*#db5931;*/
+}
+
+#header_project {
+	padding-bottom: 40px;
+	margin-bottom: 60px;
+	background-color: #0067B1; /*#db5931;*/
+}
+
+.bg_img {
+    background-image: url("../imgs/diagram.svg");
+    background-position: 10% 100%;
+    background-repeat: no-repeat;
+    background-size: 60%;
+    
+}
+
+#intro {
+	margin-top: 60px;
+	color: #cee9fa; /*#ffa68b;*/
+	font-family: "museo-slab";
+	font-weight: 100;
+	font-size: 24px;
+}
+
+.thumbnails {
+	margin-bottom: 40px;
+}
+
+body {
+    /*padding-top: 70px;*/ /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    /*background-color: #d03100; #f7f9f2;*/
+}
+
+h1 {
+	color: #ffe9e2;
+	font-family: "museo-slab";
+	font-weight: 300;
+	letter-spacing: 0.04em;
+	margin-top: 100px;
+	font-size: 42px;
+}
+
+h2 {
+	color: #86BFE2;
+	margin-top: 0px;
+	font-family: "museo-slab";
+	font-weight: 100;
+	font-size: 36px;
+}
+
+h2.project {
+	color: #616161;
+	margin-top: 0px;
+	font-family: "museo-slab";
+	font-weight: 300;
+	font-size: 36px;
+}
+
+h3 {
+	margin-top: 0px;
+	color: #616161;
+	font-family: "museo-slab";
+	font-weight: 300;
+	font-size: 28px;
+}
+
+a {
+	color: #616161;
+	text-decoration: none;
+	
+}
+
+a:hover, a:active { 
+	color: #0067B1; 
+	border: none; 
+	text-decoration: none;
+}
+
+h3.project {
+	margin-bottom: 20px;
+	color: #616161;
+	font-family: "museo-slab";
+	font-weight: 100;
+	font-size: 28px;
+	line-height: 0.6;
+}
+
+h3.footer {
+	margin-top: 30px;
+	margin-bottom: 0px;
+	color: #616161;
+	font-family: "museo-slab";
+	font-weight: 100;
+	font-size: 28px;
+}
+
+.group_participants {
+	color: #616161;
+	font-family: "museo-slab";
+	font-weight: 100;
+	font-style: italic;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.project_description {
+	color: #616161;
+	font-family: "museo-slab";
+	font-weight: 100;
+	font-size: 20px;
+}
+
+h4 {
+	margin-top: 0px;
+	color: #616161;
+	font-family: "museo-slab";
+	font-weight: 300;
+	font-size: 20px;
+}
+
+.img_container_left {
+	float:left;
+	width: 480px;
+	padding: 10px;
+	padding-right: 20px;
+	padding-left: 0px;
+	
+}
+
+.img_container_right {
+	float:right;
+	width: 480px;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 0px;
+	
+}
+
+.image_left {
+	padding: 0px;
+}
+
+.img_caption {
+	text-align: left;
+	font-family: "museo-slab";
+	font-weight: 300;
+	font-size: 16px;
+}
+
+#footer {
+	background-color: #dbdbdb;
+	margin-top: 30px;
+}
+
+.m_logo {
+    background-image: url("../imgs/logo.png");
+    height: 200px;
+    background-position: -15% 0%;
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+
+.fhp_logo {
+    background-image: url("../imgs/FHP_LOG_norm_POS_CMYK_rotated.svg");
+    height: 200px;
+    background-position: 0% 37%;
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+
